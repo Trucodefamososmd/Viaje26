@@ -49,18 +49,21 @@
 
   /* CALENDARIO RESPONSIVO */
   .calendar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    display: flex;
+    justify-content: center;
     gap: 12px;
     max-width: 1000px;
     margin: 0 auto 40px;
     padding: 0 10px;
+    overflow-x: auto; /* scroll horizontal en celular */
+    -webkit-overflow-scrolling: touch;
   }
 
   .column {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    min-width: 80px;
   }
 
   .weekday {
@@ -124,8 +127,10 @@
     justify-content: center;
     gap: 14px;
     margin-bottom: 45px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* no wrapping en móvil */
+    overflow-x: auto; /* scroll horizontal si hace falta */
     padding: 0 10px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .btn {
@@ -137,6 +142,7 @@
     color: white;
     box-shadow: 0 10px 26px rgba(0,0,0,0.25);
     transition: transform 0.2s;
+    flex: 0 0 auto;
   }
 
   .btn:hover {
@@ -173,14 +179,18 @@
     font-size: 16px;
   }
 
+  /* MEDIA QUERIES */
   @media (max-width: 700px) {
     h1 { font-size: 30px; }
     .day { height: 50px; font-size: 18px; }
     .weekday { font-size: 11px; letter-spacing: 1px; }
     .btn { padding: 12px 22px; font-size: 14px; }
-    .clock-box { max-width: 300px; padding: 16px 20px; }
+    .clock-box { max-width: 90%; padding: 16px 20px; }
     .clock-box h2 { font-size: 18px; }
     .clock-box div { font-size: 14px; }
+    .calendar {
+      flex-wrap: nowrap; /* todo en fila */
+    }
   }
 </style>
 </head>
