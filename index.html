@@ -4,15 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#64a1fd">
-
 <title>Viaje 2026 ✈️</title>
 
 <style>
   body {
     margin: 0;
     font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-    background:
-      radial-gradient(circle at top left, #f8a0a0 0%, #64a1fd 40%, #f8a0a0 100%);
+    background: radial-gradient(circle at top left, #f8a0a0 0%, #64a1fd 40%, #f8a0a0 100%);
     color: #222;
     min-height: 100vh;
     text-align: center;
@@ -49,27 +47,29 @@
     color: white;
   }
 
+  /* CALENDARIO RESPONSIVO */
   .calendar {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 22px;
-    max-width: 1050px;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 12px;
+    max-width: 1000px;
     margin: 0 auto 40px;
+    padding: 0 10px;
   }
 
   .column {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
   .weekday {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
     border-bottom: 1px solid rgba(0,0,0,0.15);
   }
 
@@ -78,18 +78,18 @@
   }
 
   .day {
-    height: 80px;
-    border-radius: 18px;
+    height: 60px;
+    border-radius: 14px;
     text-decoration: none;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 700;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     transition: transform 0.2s, opacity 0.3s;
   }
 
@@ -106,40 +106,41 @@
   }
 
   .day:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
   }
 
   .day.past {
-    opacity: 0.4;
-    filter: grayscale(80%);
+    opacity: 0.5;
+    filter: grayscale(70%);
   }
 
   .day.today {
-    outline: 3px solid white;
-    box-shadow: 0 0 0 6px rgba(255,255,255,0.45);
+    outline: 2px solid white;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.4);
   }
 
   .buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 14px;
     margin-bottom: 45px;
     flex-wrap: wrap;
+    padding: 0 10px;
   }
 
   .btn {
-    padding: 18px 34px;
+    padding: 14px 28px;
     border-radius: 38px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     color: white;
-    box-shadow: 0 14px 32px rgba(0,0,0,0.25);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.25);
     transition: transform 0.2s;
   }
 
   .btn:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
   }
 
   .km { background: #2e7d32; }
@@ -150,11 +151,11 @@
 
   .clock-box {
     background: white;
-    max-width: 420px;
+    max-width: 360px;
     margin: 0 auto 55px;
-    padding: 26px 30px 30px;
-    border-radius: 28px;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    padding: 20px 24px 26px;
+    border-radius: 22px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.18);
   }
 
   body.dark .clock-box {
@@ -162,19 +163,24 @@
   }
 
   .clock-box h2 {
-    margin: 0 0 18px;
-    font-size: 24px;
+    margin: 0 0 14px;
+    font-size: 20px;
     font-weight: 700;
   }
 
   .clock-box div {
-    margin: 8px 0;
-    font-size: 18px;
+    margin: 6px 0;
+    font-size: 16px;
   }
 
   @media (max-width: 700px) {
-    h1 { font-size: 34px; }
-    .day { height: 68px; font-size: 22px; }
+    h1 { font-size: 30px; }
+    .day { height: 50px; font-size: 18px; }
+    .weekday { font-size: 11px; letter-spacing: 1px; }
+    .btn { padding: 12px 22px; font-size: 14px; }
+    .clock-box { max-width: 300px; padding: 16px 20px; }
+    .clock-box h2 { font-size: 18px; }
+    .clock-box div { font-size: 14px; }
   }
 </style>
 </head>
@@ -189,7 +195,7 @@
 
 <div class="buttons">
   <a href="km.html" class="btn km">🚶 Km caminados</a>
-  <a href="rest.html" class="btn rest">🍝 Restaurantes</a>
+  <a href="sorpresa.html" class="btn rest">🍝 Restaurantes</a>
   <a href="tours.html" class="btn tours">🗺️ Info</a>
   <a href="sorpresa.html" class="btn tateti">SORPRESA</a>
   <a href="https://juegosonlinemd.netlify.app/index.html" target="_blank" class="btn games">
@@ -210,6 +216,7 @@
 const calendar = document.getElementById("calendar");
 const weekDays = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 
+// Crear columnas
 const columns = weekDays.map(day => {
   const col = document.createElement("div");
   col.className = "column";
@@ -218,6 +225,7 @@ const columns = weekDays.map(day => {
   return col;
 });
 
+// Función para los colores
 function flag(day) {
   if (day <= 13)
     return "linear-gradient(90deg,#009246 33%,#ffffff 33%,#ffffff 66%,#ce2b37 66%)";
