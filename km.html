@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2e7d32">
+
+<title>🚶 KM Caminados</title>
+
+<style>
+  :root {
+    --bg: linear-gradient(135deg, #c8e6c9, #e3f2fd);
+    --card: #ffffff;
+    --text: #1b1b1b;
+    --accent: #2e7d32;
+    --day-bg: rgba(0,0,0,0.12);
+  }
+
+  body.dark {
+    --bg: linear-gradient(135deg, #121212, #1e1e2e);
+    --card: rgba(20,20,30,0.95);
+    --text: #f0f0f0;
+    --accent: #81c784;
+    --day-bg: rgba(0,0,0,0.45);
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 14px;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  .toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.4);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    z-index: 10;
+  }
+
+  body.dark .toggle {
+    background: rgba(255,255,255,0.15);
+    color: white;
+  }
+
+  .card {
+    background: var(--card);
+    width: 100%;
+    max-width: 420px;
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    z-index: 2;
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .total {
+    font-size: 22px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 26px;
+    color: var(--accent);
+  }
+
+  .day {
+    background: var(--day-bg);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 14px;
+    backdrop-filter: blur(2px);
+  }
+
+  .day h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+  }
+
+  .controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: none;
+    font-size: 16px;
+  }
+
+  button.add {
+    padding: 10px 16px;
+    border-radius: 14px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .back {
+    display: block;
+    margin-top: 28px;
+    text-align: center;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 30px;
+    background: #1565c0;
+    color: white;
+    font-weight: 600;
+  }
+
+  /* EMOJIS */
+  .emoji {
+    position: fixed;
+    font-size: 28px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+    animation: float linear infinite;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(110vh) translateX(0) rotate(0deg);
+    }
+    to {
+      transform: translateY(-130vh) translateX(80px) rotate(360deg);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<button class="toggle" onclick="toggleDark()">🌙</button>
+
+<div class="card">
+  <h1>🚶 KM Caminados</h1>
+  <div class="total">Total: <span id="totalKm">0</span> km</div>
+
+  <div id="days"></div>
+
+  <a href="index.html" class="back">⬅ Volver al inicio</a>
+</div>
+
+<script>
+const daysContainer = document.getElementById("days");
+const totalEl = document.getElementById("totalKm");
+
+/* FEBRERO 2026 */
+const start = new Date(2026, 1, 1);
+const end   = new Date(2026, 1, 22);
+
+/* KM POR DÍA */
+let kmPorDia = JSON.parse(localStorage.getItem("kmPorDia")) || {};
+
+function save() {
+  localStorage.setItem("kmPorDia", JSON.stringify(kmPorDia));
+}
+
+function updateTotal() {
+  let total = 0;
+  Object.values(kmPorDia).forEach(v => total += v);
+  totalEl.textContent = total.toFixed(2);
+}
+
+function formatDate(date) {
+  return date.toLocaleDateString("es-AR", {
+    weekday: "long",
+    day: "numeric",
+    month: "numeric"
+  });
+}
+
+let current = new Date(start);
+
+while (current <= end) {
+  const key = current.toISOString().split("T")[0];
+  kmPorDia[key] ??= 0;
+
+  const div = document.createElement("div");
+  div.className = "day";
+
+  div.innerHTML = `
+    <h3>${formatDate(current)}</h3>
+    <div class="controls">
+      <input type="text" value="${kmPorDia[key] || ""}" placeholder="Km caminados">
+      <button class="add">Guardar</button>
+    </div>
+  `;
+
+  const input = div.querySelector("input");
+  const btn = div.querySelector("button");
+
+  btn.onclick = () => {
+    const value = input.value.replace(",", ".");
+    const km = parseFloat(value);
+    kmPorDia[key] = isNaN(km) ? 0 : km;
+    save();
+    updateTotal();
+  };
+
+  daysContainer.appendChild(div);
+  current.setDate(current.getDate() + 1);
+}
+
+updateTotal();
+
+/* Dark mode persistente */
+function toggleDark() {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("darkKm", document.body.classList.contains("dark"));
+}
+if (localStorage.getItem("darkKm") === "true") {
+  document.body.classList.add("dark");
+}
+
+/* Emojis flotantes */
+const emojis = ["🚶‍♂️","😮‍💨","🥵","👟","🗺️","🇮🇹","🇫🇷","🇧🇪","🇳🇱"];
+
+for (let i = 0; i < 26; i++) {
+  const e = document.createElement("div");
+  e.className = "emoji";
+  e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  e.style.left = Math.random() * 100 + "vw";
+  e.style.animationDuration = 10 + Math.random() * 20 + "s";
+  e.style.fontSize = 20 + Math.random() * 22 + "px";
+  e.style.animationDelay = Math.random() * 10 + "s";
+  document.body.appendChild(e);
+}
+</script>
+
+</body>
+</html>

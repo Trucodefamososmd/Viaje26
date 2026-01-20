@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>🍝 Restaurantes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --bg1:#fdf2e9;
+  --bg2:#fde68a;
+  --card:#ffffff;
+  --text:#1f2937;
+  --accent:#fb923c;
+  --btn:#f97316;
+  --btn-hover:#ea580c;
+}
+
+body.dark{
+  --bg1:#0f2027;
+  --bg2:#203a43;
+  --card:#020617;
+  --text:#e5e7eb;
+  --accent:#38bdf8;
+  --btn:#2563eb;
+  --btn-hover:#1d4ed8;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:system-ui, sans-serif;
+  color:var(--text);
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  overflow:hidden;
+}
+
+/* EMOJIS (BORDES) */
+.emoji{
+  position:fixed;
+  font-size:24px;
+  opacity:.35;
+  pointer-events:none;
+  animation:float linear infinite;
+}
+
+.left{left:10px}
+.right{right:10px}
+
+@keyframes float{
+  from{transform:translateY(110vh) rotate(0deg)}
+  to{transform:translateY(-120vh) rotate(360deg)}
+}
+
+/* CARD */
+.container{
+  max-width:520px;
+  margin:50px auto;
+  padding:26px;
+  background:var(--card);
+  border-radius:22px;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+/* HEADER */
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.toggle{
+  border:none;
+  border-radius:999px;
+  padding:8px 14px;
+  background:var(--btn);
+  color:white;
+  cursor:pointer;
+}
+
+h1{
+  text-align:center;
+  margin:10px 0 4px;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:14px;
+  opacity:.8;
+  margin-bottom:22px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.city{
+  text-decoration:none;
+  padding:18px 12px;
+  border-radius:18px;
+  background:linear-gradient(135deg,var(--btn),var(--btn-hover));
+  color:white;
+  font-size:17px;
+  font-weight:600;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 10px 22px rgba(0,0,0,.25);
+  transition:.25s;
+}
+
+.city:hover{
+  transform:translateY(-4px) scale(1.03);
+}
+
+/* BACK */
+.back{
+  display:block;
+  margin-top:22px;
+  text-align:center;
+  text-decoration:none;
+  color:var(--accent);
+  font-weight:600;
+}
+
+/* MOBILE */
+@media(max-width:520px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- EMOJIS -->
+<script>
+const emojis=["🍕","🍝","🍷","🥐","🍟","🧀","🍨","🧇","🇮🇹","🇫🇷","🇧🇪","🇳🇱"];
+for(let i=0;i<20;i++){
+  const e=document.createElement("div");
+  e.className="emoji " + (Math.random()>0.5?"left":"right");
+  e.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.animationDuration=14+Math.random()*20+"s";
+  document.body.appendChild(e);
+}
+</script>
+
+<div class="container">
+  <div class="top">
+    <div></div>
+    <button class="toggle" onclick="toggleMode()">🌙</button>
+  </div>
+
+  <h1>🍝 Restaurantes</h1>
+  <div class="subtitle">Elegí la ciudad y guardá dónde comer</div>
+
+  <div class="grid">
+    <a href="comidaroma.html" class="city">🇮🇹 Roma</a>
+    <a href="comidavenecia.html" class="city">🚤 Venecia</a>
+    <a href="comidaflorencia.html" class="city">🎨 Florencia</a>
+    <a href="comidasanta.html" class="city">🌊 Santa Margherita</a>
+    <a href="comidacinque.html" class="city">🏞️ Cinque Terre</a>
+    <a href="comidamilan.html" class="city">🏙️ Milán</a>
+    <a href="comidaams.html" class="city">🚲 Ámsterdam</a>
+    <a href="comidaparis.html" class="city">🥐 París</a>
+    <a href="comidabruselas.html" class="city">🍟 Bruselas</a>
+    <a href="comidabrujas.html" class="city">🧇 Brujas</a>
+  </div>
+
+  <a href="index.html" class="back">⬅️ Volver al inicio</a>
+</div>
+
+<script>
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

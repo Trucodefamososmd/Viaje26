@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerario de Viaje</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffd9c7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .ciudad {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .ciudad-header {
+            padding: 18px 20px;
+            cursor: pointer;
+            background: #ff6161;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .ciudad-header:hover {
+            background: #945151;
+        }
+
+        .ciudad-content {
+            padding: 15px 20px;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+            background-color: #f9fafb;
+        }
+
+        .precio {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 8px;
+        }
+
+        .transporte {
+            margin-left: 15px;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .arrow {
+            transition: transform 0.3s;
+            font-size: 1.2em;
+        }
+
+        .arrow.open {
+            transform: rotate(90deg);
+        }
+
+        .btn-inicio {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 20px auto;
+            padding: 12px 25px;
+            background-color: #db3434;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-inicio:hover {
+            background-color: #b92929;
+        }
+
+        /* Para mejorar legibilidad de listas */
+        ul {
+            margin: 5px 0 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Itinerario de Viaje</h1>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            Roma: 2-05/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$582</p>
+            <p>Hotel: Al Manthia (Vía dei Giardini 35/b)</p>
+            <div class="transporte">
+                <p>05/02 Tren Roma Termini → Venecia Santa Lucia: 7:55 – 11:55 (4h) U$154</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            Venecia: 5-7/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$470 + U$38</p>
+            <p>Hotel: Cà Fontana (3513 Castello, Castello, 30122 Venice, Italy)</p>
+            <div class="transporte">
+                <p>07/02 Tren Venecia Santa Lucia → Firenze Santa Maria Novella: 8:05 – 10:20 (2h30) U$89</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            Florencia: 7-9/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$243 + U$42</p>
+            <p>Hotel: Esperanza (Via dell'Inferno 3, Santa Maria Novella, 50123 Florence, Italy)</p>
+            <div class="transporte">
+                <p>09/02 Tren Firenze Maria Novella → Santa Margherita Liguria: 8:28 – 12:41 (4h) U$146</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            Santa Margherita de Liguria: 9-11/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$220 + U$122</p>
+            <p>Hotel: Casa Bianca by PortofinoHomes (2 Via Cairoli)</p>
+            <div class="transporte">
+                <p>11/02 Santa Margherita Ligur → Portofino → Milan Central: 13:41 – 15:55 (2h) U$74</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            Milán: 11-14/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$801</p>
+            <p>Hotel: Panora Loft (Piazza Mentana 8, cerca del Duomo, zona Brera)</p>
+            <div class="transporte">
+                <p>14/02 Avión Milán → Amsterdam: 8:55 – 10:50 (2h)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            Amsterdam: 14-17/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$729</p>
+            <p>Hotel: XO Hotels City Centre (Beursstraat 11-19, Amsterdam City Center, 1012 JT Amsterdam)</p>
+            <div class="transporte">
+                <p>17/02 Tren Amsterdam Central → Paris Gare Du Nord: 7:10 – 10:38 (3h30) U$280</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            París: 17-19/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$464</p>
+            <p>Hotel: Teamhotel Opera Madelaine (113 Rue Saint Lazare)</p>
+            <div class="transporte">
+                <p>19/02 Paris Gare Du Nord → Brussels Midi: 10:48 – 12:17 U$147</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ciudad">
+        <div class="ciudad-header">
+            Bruselas: 19-21/02
+            <span class="arrow">▶</span>
+        </div>
+        <div class="ciudad-content">
+            <p class="precio">Costo: U$343 + U$12</p>
+            <p>Hotel: Atlas Hotel Brussels (Rue Du Vieux Marché Aux Grains, 30)</p>
+        </div>
+    </div>
+
+    <a href="index.html" class="btn-inicio">← Volver al inicio</a>
+
+    <script>
+        const headers = document.querySelectorAll('.ciudad-header');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                const arrow = header.querySelector('.arrow');
+                arrow.classList.toggle('open');
+            });
+        });
+    </script>
+
+</body>
+</html>
