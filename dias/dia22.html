@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vuelta a casa</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top left, #f8a0a0 0%, #64a1fd 40%, #f8a0a0 100%);
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.6em;
+      margin-bottom: 20px;
+      animation: float 1.4s infinite alternate;
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .btn-inicio {
+      padding: 15px 32px;
+      background-color: #222;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 14px;
+      font-weight: bold;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    .btn-inicio:hover {
+      background-color: #444;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-12px); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Vuelta a casa ✈️</h1>
+
+  <p>
+    Se termina el viaje, pero no las historias 💙<br>
+    Ojalá te alcance la batería, que el vuelo sea tranquilo<br>
+    y que vuelvas con la cabeza llena de recuerdos,<br>
+    fotos, anécdotas… y ganas de volver a viajar ✨
+  </p>
+
+  <a href="../index.html" class="btn-inicio">← Volver al inicio</a>
+
+</body>
+</html>
