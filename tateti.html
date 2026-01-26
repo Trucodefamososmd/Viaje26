@@ -2,291 +2,254 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>🎉 Ta Te Ti Fiestoso</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Ta-Te-Ti Rocky 🥊</title>
 <style>
-*{box-sizing:border-box}
+  body {
+    margin:0;
+    font-family:'Arial',sans-serif;
+    background-color:#FFD700;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:1rem;
+    min-height:100vh;
+  }
 
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:system-ui, sans-serif;
-  background:radial-gradient(circle at top,#ff9a9e,#fad0c4,#fbc2eb);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
+  h1 {
+    font-family:'Impact',sans-serif;
+    font-size:6vw;
+    color:#FFD700;
+    -webkit-text-stroke:2px #D32F2F;
+    text-align:center;
+    margin:1rem 0;
+  }
 
-/* 🎉 CONFETTI */
-.confetti{
-  position:fixed;
-  width:8px;
-  height:14px;
-  background:hsl(var(--h),90%,60%);
-  top:-20px;
-  left:var(--x);
-  animation:fall linear infinite;
-  opacity:.8;
-  pointer-events:none;
-}
+  #menu {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:1rem;
+    gap:1rem;
+  }
 
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg)}
-}
+  #menu button {
+    padding:1rem 2rem;
+    font-size:1.2rem;
+    font-weight:bold;
+    color:#FFD700;
+    background-color:#B71C1C;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+  }
 
-/* 🎆 FUEGOS */
-.firework{
-  position:fixed;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:white;
-  animation:boom 1s ease-out forwards;
-  pointer-events:none;
-}
+  #menu button:hover{
+    background-color:#D32F2F;
+    transform:translateY(-2px);
+  }
 
-@keyframes boom{
-  from{transform:scale(0);opacity:1}
-  to{transform:scale(8);opacity:0}
-}
+  #board {
+    display:grid;
+    grid-template-columns:repeat(3,100px);
+    grid-template-rows:repeat(3,100px);
+    gap:10px;
+    margin-bottom:1rem;
+    display:none;
+  }
 
-/* CARD */
-.card{
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(8px);
-  border-radius:22px;
-  padding:24px;
-  color:white;
-  width:320px;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.4);
-}
+  .cell {
+    background-color:#FFF59D;
+    border:2px solid #D32F2F;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:3rem;
+    cursor:pointer;
+    position:relative;
+  }
 
-h1{
-  margin:0 0 12px;
-}
+  .cell img {
+    max-width:80%;
+    max-height:80%;
+  }
 
-.menu button,
-.cell{
-  width:100%;
-  padding:14px;
-  margin:6px 0;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(135deg,#38bdf8,#6366f1);
-  color:white;
-  font-size:18px;
-  cursor:pointer;
-  transition:.2s;
-}
+  #message {
+    font-family:'Oswald',sans-serif;
+    font-size:1.5rem;
+    color:#D32F2F;
+    margin-bottom:1rem;
+    text-align:center;
+  }
 
-button:hover{
-  transform:scale(1.05);
-}
+  button.game-btn {
+    padding:1rem 2rem;
+    font-size:1.2rem;
+    font-weight:bold;
+    color:#FFD700;
+    background-color:#B71C1C;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    margin:0.5rem;
+  }
 
-.board{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin:16px 0;
-}
+  button.game-btn:hover {
+    background-color:#D32F2F;
+    transform:translateY(-2px);
+  }
 
-.cell{
-  height:80px;
-  font-size:38px;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.status{
-  margin:10px 0;
-  font-size:16px;
-}
-
-.back{
-  margin-top:10px;
-  display:block;
-  color:#93c5fd;
-  text-decoration:none;
-}
+  @media(max-width:500px){
+    #board{ grid-template-columns:repeat(3,70px); grid-template-rows:repeat(3,70px); }
+  }
 </style>
 </head>
-
 <body>
 
-<script>
-// 🎉 CONFETTI
-for(let i=0;i<40;i++){
-  const c=document.createElement("div");
-  c.className="confetti";
-  c.style.setProperty("--x",Math.random()*100+"vw");
-  c.style.setProperty("--h",Math.random()*360);
-  c.style.animationDuration=4+Math.random()*4+"s";
-  document.body.appendChild(c);
-}
+<h1>Ta-Te-Ti Rocky 🥊</h1>
 
-// 🎆 FUEGOS
-setInterval(()=>{
-  const f=document.createElement("div");
-  f.className="firework";
-  f.style.left=Math.random()*100+"vw";
-  f.style.top=Math.random()*60+"vh";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),1000);
-},2000);
-</script>
-
-<div class="card" id="menu">
-  <h1>🎉 Ta Te Ti</h1>
-  <p>Elegí cómo jugar</p>
-  <div class="menu">
-    <button onclick="startGame('cpu')">🧠 vs Máquina</button>
-    <button onclick="startGame('pvp')">👥 2 Personas</button>
-  </div>
-  <a href="index.html" class="back">⬅️ Volver</a>
+<div id="menu">
+  <button onclick="startGame('cpu')">Vs Máquina</button>
+  <button onclick="startGame('2p')">2 Jugadores</button>
 </div>
 
-<div class="card" id="game" style="display:none">
-  <h1>🎮 Ta Te Ti</h1>
-  <div class="status" id="status"></div>
-  <div class="board" id="board"></div>
-  <button onclick="reset()">🔄 Reiniciar</button>
-</div>
+<div id="message"></div>
+<div id="board"></div>
+
+<button class="game-btn" onclick="startGame(currentMode)">🔄 Reiniciar</button>
+<button class="game-btn" onclick="location.href='index.html'">🏠 Volver al inicio</button>
 
 <script>
-let board,turn,mode,gameOver=false;
+const boardEl = document.getElementById('board');
+const messageEl = document.getElementById('message');
+let cells = [];
+let gameOver = false;
+let currentMode = null;
+let currentPlayer = 'user';
+const userSymbol = '🥊';
+const compSymbol = 'rocky.png';
 
-function startGame(m){
-  mode=m;
-  board=["","","","","","","","",""];
-  turn="X";
+function startGame(mode){
+  currentMode = mode;
+  boardEl.style.display='grid';
+  document.getElementById('menu').style.display='none';
+  cells = Array(9).fill(null);
   gameOver=false;
+  currentPlayer='user';
+  boardEl.innerHTML='';
+  messageEl.textContent = currentMode==='cpu'? 'Tu turno 🥊':'Jugador 1 🥊';
 
-  menu.style.display="none";
-  game.style.display="block";
-  render();
+  for(let i=0;i<9;i++){
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cell.dataset.index=i;
+    cell.addEventListener('click',()=>handleMove(i,cell));
+    boardEl.appendChild(cell);
+  }
 }
 
-function render(){
-  boardDiv.innerHTML="";
-  board.forEach((v,i)=>{
-    const c=document.createElement("button");
-    c.className="cell";
-    c.textContent=v;
-    c.onclick=()=>play(i);
-    boardDiv.appendChild(c);
-  });
-  updateStatus();
+function handleMove(i,cell){
+  if(gameOver || cells[i]) return;
+
+  if(currentMode==='2p'){
+    const symbol = currentPlayer==='user'? userSymbol:compSymbol;
+    if(symbol===compSymbol){
+      const img=document.createElement('img');
+      img.src=compSymbol;
+      cell.appendChild(img);
+    } else cell.textContent = symbol;
+
+    cells[i]=symbol;
+    if(checkWin(symbol)){
+      messageEl.textContent = currentPlayer==='user'?'¡Jugador 1 gana! 🥳':'¡Jugador 2 gana! 🥳';
+      gameOver=true;
+      return;
+    }
+    if(cells.every(c=>c!==null)){ messageEl.textContent='¡Empate! 🤝'; gameOver=true; return; }
+    currentPlayer=currentPlayer==='user'?'comp':'user';
+    messageEl.textContent = currentPlayer==='user'?'Jugador 1 🥊':'Jugador 2 🥊';
+  } else {
+    // vs CPU
+    cells[i]='user';
+    cell.textContent=userSymbol;
+    if(checkWin(userSymbol)){ messageEl.textContent='¡Ganaste! 🥳'; gameOver=true; return; }
+    if(cells.every(c=>c!==null)){ messageEl.textContent='¡Empate! 🤝'; gameOver=true; return; }
+    messageEl.textContent='Turno de Rocky...';
+    setTimeout(compMove,400);
+  }
 }
 
-function updateStatus(){
+function compMove(){
   if(gameOver) return;
-  if(mode==="cpu" && turn==="O"){
-    status.textContent="🤖 Juega la máquina...";
-    setTimeout(cpuMove,600);
-  }else{
-    status.textContent=`Turno de ${turn}`;
-  }
+
+  const bestMove = minimax(cells,'comp').index;
+  cells[bestMove]='comp';
+  const cell = boardEl.querySelector(`[data-index='${bestMove}']`);
+  const img=document.createElement('img');
+  img.src=compSymbol;
+  cell.appendChild(img);
+
+  if(checkWin('comp')){ messageEl.textContent='Rocky gana 🥊💥'; gameOver=true; return; }
+  if(cells.every(c=>c!==null)){ messageEl.textContent='¡Empate! 🤝'; gameOver=true; return; }
+  messageEl.textContent='Tu turno 🥊';
 }
 
-function play(i){
-  if(board[i]||gameOver) return;
-  board[i]=turn;
-
-  if(checkWin()){
-    status.textContent=`🎉 Ganó ${turn}`;
-    gameOver=true;
-    return;
-  }
-
-  if(board.every(c=>c)){
-    status.textContent="🤝 Empate";
-    gameOver=true;
-    return;
-  }
-
-  turn=turn==="X"?"O":"X";
-  render();
-}
-
-function checkWin(){
-  const w=[
+function checkWin(symbol){
+  const combos=[
     [0,1,2],[3,4,5],[6,7,8],
     [0,3,6],[1,4,7],[2,5,8],
     [0,4,8],[2,4,6]
   ];
-  return w.some(l=>l.every(i=>board[i]===turn));
+  for(let combo of combos){
+    if(combo.every(i=>cells[i]===symbol || (symbol==='comp' && cells[i]==='comp'))) return true;
+  }
+  return false;
 }
 
-// 🤖 MAQUINA (juega bien)
-function cpuMove(){
-  if(gameOver) return;
+function emptyIndexes(board){
+  return board.map((v,i)=>v===null? i:null).filter(v=>v!==null);
+}
 
-  // ganar
-  for(let i=0;i<9;i++){
-    if(!board[i]){
-      board[i]="O";
-      if(checkWin()) return endCpu();
-      board[i]="";
-    }
+function minimax(newBoard, player){
+  const availSpots = emptyIndexes(newBoard);
+
+  if(checkWin('user')) return {score:-10};
+  else if(checkWin('comp')) return {score:10};
+  else if(availSpots.length===0) return {score:0};
+
+  let moves=[];
+  for(let i=0;i<availSpots.length;i++){
+    let move = {};
+    move.index=availSpots[i];
+    newBoard[availSpots[i]] = player==='comp'? 'comp':'user';
+
+    let result = minimax(newBoard, player==='comp'?'user':'comp');
+    move.score=result.score;
+
+    newBoard[availSpots[i]]=null;
+    moves.push(move);
   }
 
-  // bloquear
-  for(let i=0;i<9;i++){
-    if(!board[i]){
-      board[i]="X";
-      if(checkWin()){
-        board[i]="O";
-        return endCpu();
+  let bestMove;
+  if(player==='comp'){
+    let bestScore=-10000;
+    for(let i=0;i<moves.length;i++){
+      if(moves[i].score>bestScore){
+        bestScore=moves[i].score;
+        bestMove=i;
       }
-      board[i]="";
+    }
+  } else {
+    let bestScore=10000;
+    for(let i=0;i<moves.length;i++){
+      if(moves[i].score<bestScore){
+        bestScore=moves[i].score;
+        bestMove=i;
+      }
     }
   }
-
-  // centro
-  if(!board[4]){board[4]="O";return endCpu();}
-
-  // esquinas
-  const corners=[0,2,6,8].filter(i=>!board[i]);
-  if(corners.length){
-    board[corners[Math.floor(Math.random()*corners.length)]]="O";
-    return endCpu();
-  }
-
-  // cualquiera
-  const free=board.map((v,i)=>v?null:i).filter(v=>v!==null);
-  board[free[Math.floor(Math.random()*free.length)]]="O";
-  endCpu();
+  return moves[bestMove];
 }
-
-function endCpu(){
-  if(checkWin()){
-    status.textContent="🤖 Ganó la máquina";
-    gameOver=true;
-    return;
-  }
-  if(board.every(c=>c)){
-    status.textContent="🤝 Empate";
-    gameOver=true;
-    return;
-  }
-  turn="X";
-  render();
-}
-
-function reset(){
-  game.style.display="none";
-  menu.style.display="block";
-}
-
-const boardDiv=document.getElementById("board");
-const status=document.getElementById("status");
-const menu=document.getElementById("menu");
-const game=document.getElementById("game");
 </script>
 
 </body>

@@ -8,145 +8,130 @@
 <title>🚶 KM Caminados</title>
 
 <style>
-  :root {
-    --bg: linear-gradient(135deg, #c8e6c9, #e3f2fd);
-    --card: #ffffff;
-    --text: #1b1b1b;
-    --accent: #2e7d32;
-    --day-bg: rgba(0,0,0,0.12);
-  }
+:root {
+  --bg: linear-gradient(135deg, #c8e6c9, #e3f2fd);
+  --card: #ffffff;
+  --text: #1b1b1b;
+  --accent: #2e7d32;
+  --day-bg: rgba(0,0,0,0.12);
+}
 
-  body.dark {
-    --bg: linear-gradient(135deg, #121212, #1e1e2e);
-    --card: rgba(20,20,30,0.95);
-    --text: #f0f0f0;
-    --accent: #81c784;
-    --day-bg: rgba(0,0,0,0.45);
-  }
+body.dark {
+  --bg: linear-gradient(135deg, #121212, #1e1e2e);
+  --card: rgba(20,20,30,0.95);
+  --text: #f0f0f0;
+  --accent: #81c784;
+  --day-bg: rgba(0,0,0,0.45);
+}
 
-  body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 40px 14px;
-    display: flex;
-    justify-content: center;
-    overflow-x: hidden;
-  }
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 40px 14px;
+  display: flex;
+  justify-content: center;
+}
 
-  .toggle {
-    position: fixed;
-    top: 18px;
-    right: 18px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    background: rgba(255,255,255,0.4);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    z-index: 10;
-  }
+.toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.4);
+}
 
-  body.dark .toggle {
-    background: rgba(255,255,255,0.15);
-    color: white;
-  }
+.card {
+  background: var(--card);
+  max-width: 420px;
+  width: 100%;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
 
-  .card {
-    background: var(--card);
-    width: 100%;
-    max-width: 420px;
-    border-radius: 28px;
-    padding: 28px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-    z-index: 2;
-  }
+h1 {
+  text-align: center;
+}
 
-  h1 {
-    margin: 0 0 10px;
-    font-size: 30px;
-    text-align: center;
-  }
+.total {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
 
-  .total {
-    font-size: 22px;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 26px;
-    color: var(--accent);
-  }
+.day {
+  background: var(--day-bg);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
 
-  .day {
-    background: var(--day-bg);
-    border-radius: 20px;
-    padding: 16px;
-    margin-bottom: 14px;
-    backdrop-filter: blur(2px);
-  }
+.controls {
+  display: flex;
+  gap: 8px;
+}
 
-  .day h3 {
-    margin: 0 0 10px;
-    font-size: 15px;
-    text-transform: capitalize;
-  }
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 14px;
+  border: none;
+}
 
-  .controls {
-    display: flex;
-    gap: 8px;
-  }
+button.add {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-weight: 700;
+}
 
-  input {
-    flex: 1;
-    padding: 10px 12px;
-    border-radius: 14px;
-    border: none;
-    font-size: 16px;
-  }
+.back {
+  display: block;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 30px;
+  background: #1565c0;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
 
-  button.add {
-    padding: 10px 16px;
-    border-radius: 14px;
-    border: none;
-    background: var(--accent);
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-  }
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--card);
+  padding: 16px 22px;
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: 0.4s;
+  z-index: 999;
+}
 
-  .back {
-    display: block;
-    margin-top: 28px;
-    text-align: center;
-    text-decoration: none;
-    padding: 14px;
-    border-radius: 30px;
-    background: #1565c0;
-    color: white;
-    font-weight: 600;
-  }
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
-  /* EMOJIS */
-  .emoji {
-    position: fixed;
-    font-size: 28px;
-    opacity: 0.35;
-    pointer-events: none;
-    z-index: 0;
-    animation: float linear infinite;
-  }
-
-  @keyframes float {
-    from {
-      transform: translateY(110vh) translateX(0) rotate(0deg);
-    }
-    to {
-      transform: translateY(-130vh) translateX(80px) rotate(360deg);
-    }
-  }
+.toast span {
+  display: block;
+  font-size: 14px;
+  opacity: .8;
+}
 </style>
 </head>
 
@@ -158,95 +143,115 @@
   <h1>🚶 KM Caminados</h1>
   <div class="total">Total: <span id="totalKm">0</span> km</div>
 
+  <button onclick="exportPDF()" class="back" style="background:#2e7d32">
+    📄 Exportar calendario PDF
+  </button>
+
   <div id="days"></div>
 
-  <a href="index.html" class="back">⬅ Volver al inicio</a>
+  <a href="index.html" class="back">⬅ Volver</a>
 </div>
 
+<div id="toast" class="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+
 <script>
+const start = new Date(2026,1,1);
+const end = new Date(2026,1,22);
+let kmPorDia = JSON.parse(localStorage.getItem("kmPorDia")) || {};
+
 const daysContainer = document.getElementById("days");
 const totalEl = document.getElementById("totalKm");
 
-/* FEBRERO 2026 */
-const start = new Date(2026, 1, 1);
-const end   = new Date(2026, 1, 22);
-
-/* KM POR DÍA */
-let kmPorDia = JSON.parse(localStorage.getItem("kmPorDia")) || {};
-
-function save() {
-  localStorage.setItem("kmPorDia", JSON.stringify(kmPorDia));
+function save(){ localStorage.setItem("kmPorDia", JSON.stringify(kmPorDia)); }
+function updateTotal(){
+  let t=0; Object.values(kmPorDia).forEach(v=>t+=v);
+  totalEl.textContent = t.toFixed(2);
 }
 
-function updateTotal() {
-  let total = 0;
-  Object.values(kmPorDia).forEach(v => total += v);
-  totalEl.textContent = total.toFixed(2);
+function toast(title, sub){
+  const t = document.getElementById("toast");
+  t.innerHTML = `${title}<span>${sub}</span>`;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),4000);
 }
 
-function formatDate(date) {
-  return date.toLocaleDateString("es-AR", {
-    weekday: "long",
-    day: "numeric",
-    month: "numeric"
-  });
+function eq(k){
+  if (k < 1)  return ["Nada 😅", "Caminaste de casa a Bet El"];
+  if (k < 2)  return ["Poco 🙂", "Caminaste aproximadamente de casa hasta Schuster"];
+  if (k < 3)  return ["Bien ahí 💪", "Caminaste de casa a ORT"];
+  if (k < 4)  return ["Buen paseo 👀", "Caminaste de casa a Kuarzo… ¿vieron a algún famoso?"];
+  if (k < 6)  return ["Caminata fuerte 🚶‍♂️", "Caminaste desde casa hasta lo de la abuela"];
+  if (k < 7)  return ["Muy bien 🔥", "Caminaste de casa hasta la Quinta de Olivos"];
+  if (k < 8)  return ["Nivel teatro 🎭", "Caminaste desde casa hasta el Teatro Astral"];
+  if (k < 10) return ["Tremendo 😮", "Caminaste desde casa hasta el Hotel Libertador"];
+  if (k < 12) return ["Respeto total 🫠", "Caminaste de casa a UADE. NO QUIERO VOLVEEEER"];
+  if (k < 14) return ["Pesadísimo 😳", "Caminaste de casa hasta la Villa 21-24"];
+  if (k < 17) return ["Modo hincha 🔴", "Caminaste de casa a la cancha de Independiente"];
+  if (k < 20) return ["Una locura 🥵", "Caminaste de casa a San Fernando"];
+  if (k < 25) return ["Nivel atleta 💥", "Caminaste de casa hasta Hacoaj"];
+  return ["SOS UNA BESTIA 🏆", "Caminaste de casa a Macabi"];
 }
 
-let current = new Date(start);
-
-while (current <= end) {
-  const key = current.toISOString().split("T")[0];
-  kmPorDia[key] ??= 0;
-
-  const div = document.createElement("div");
-  div.className = "day";
-
-  div.innerHTML = `
-    <h3>${formatDate(current)}</h3>
-    <div class="controls">
-      <input type="text" value="${kmPorDia[key] || ""}" placeholder="Km caminados">
-      <button class="add">Guardar</button>
-    </div>
-  `;
-
-  const input = div.querySelector("input");
-  const btn = div.querySelector("button");
-
-  btn.onclick = () => {
-    const value = input.value.replace(",", ".");
-    const km = parseFloat(value);
-    kmPorDia[key] = isNaN(km) ? 0 : km;
-    save();
-    updateTotal();
+let c=new Date(start);
+while(c<=end){
+  const key=c.toISOString().split("T")[0];
+  kmPorDia[key]??=0;
+  const d=document.createElement("div");
+  d.className="day";
+  d.innerHTML=`<h3>${c.toLocaleDateString("es-AR",{weekday:"long",day:"numeric"})}</h3>
+  <div class="controls">
+    <input value="${kmPorDia[key]||""}">
+    <button class="add">Guardar</button>
+  </div>`;
+  const i=d.querySelector("input");
+  d.querySelector("button").onclick=()=>{
+    const km=parseFloat(i.value.replace(",","."))||0;
+    kmPorDia[key]=km; save(); updateTotal();
+    if(km>0){ const[e,s]=eq(km); toast(e,s); }
   };
-
-  daysContainer.appendChild(div);
-  current.setDate(current.getDate() + 1);
+  daysContainer.appendChild(d);
+  c.setDate(c.getDate()+1);
 }
-
 updateTotal();
 
-/* Dark mode persistente */
-function toggleDark() {
+function toggleDark(){
   document.body.classList.toggle("dark");
-  localStorage.setItem("darkKm", document.body.classList.contains("dark"));
+  localStorage.setItem("darkKm",document.body.classList.contains("dark"));
 }
-if (localStorage.getItem("darkKm") === "true") {
-  document.body.classList.add("dark");
-}
+if(localStorage.getItem("darkKm")==="true")document.body.classList.add("dark");
 
-/* Emojis flotantes */
-const emojis = ["🚶‍♂️","😮‍💨","🥵","👟","🗺️","🇮🇹","🇫🇷","🇧🇪","🇳🇱"];
+/* PDF */
+function exportPDF(){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF();
+  doc.setFillColor(46,125,50);
+  doc.rect(0,0,210,30,"F");
+  doc.setTextColor(255);
+  doc.setFontSize(20);
+  doc.text("KM Caminados – Febrero 2026",105,20,{align:"center"});
+  doc.setTextColor(0);
 
-for (let i = 0; i < 26; i++) {
-  const e = document.createElement("div");
-  e.className = "emoji";
-  e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-  e.style.left = Math.random() * 100 + "vw";
-  e.style.animationDuration = 10 + Math.random() * 20 + "s";
-  e.style.fontSize = 20 + Math.random() * 22 + "px";
-  e.style.animationDelay = Math.random() * 10 + "s";
-  document.body.appendChild(e);
+  const rows=[],week=[];
+  let d=new Date(start);
+  for(let i=1;i<(d.getDay()||7);i++)week.push("");
+  while(d<=end){
+    const k=d.toISOString().split("T")[0];
+    week.push(`${d.getDate()}\n${kmPorDia[k]||""}`);
+    if(week.length===7){rows.push([...week]);week.length=0;}
+    d.setDate(d.getDate()+1);
+  }
+  if(week.length){while(week.length<7)week.push("");rows.push(week);}
+
+  doc.autoTable({
+    startY:40,
+    head:[["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"]],
+    body:rows
+  });
+
+  doc.save("KM_Caminados_Febrero_2026.pdf");
 }
 </script>
 
